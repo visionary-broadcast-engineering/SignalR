@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Client for ASP.NET Core Connection Handlers</Description>
     <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
-    <Version>1.0.4-vibe3</Version>
+    <Version>1.0.4-vibe4</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Implements the SignalR Hub Protocol over JSON.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Microsoft.AspNetCore.SignalR</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>1.0.4-vibe3</Version>
+    <Version>1.0.4-vibe4</Version>
   </PropertyGroup>
 
   <ItemGroup>
