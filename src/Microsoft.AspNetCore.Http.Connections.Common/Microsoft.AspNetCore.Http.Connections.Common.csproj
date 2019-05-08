@@ -5,7 +5,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Microsoft.AspNetCore.Http.Connections</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>1.0.4-vibe4</Version>
+    <Version>1.0.4-vibe5</Version>
   </PropertyGroup>
 
   <ItemGroup>
