@@ -89,7 +89,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             _accessTokenProvider = accessTokenProvider;
         }
 
-        public async Task StartAsync(Uri url, TransferFormat transferFormat)
+        public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken)
         {
             if (url == null)
             {
@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 }
             }
 
-            await _webSocket.ConnectAsync(resolvedUrl, CancellationToken.None);
+            await _webSocket.ConnectAsync(resolvedUrl, cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
 
             // Create the pipe pair (Application's writer is connected to Transport's reader, and vice versa)
             var options = ClientPipeOptions.DefaultOptions;

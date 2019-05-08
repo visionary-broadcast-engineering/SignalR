@@ -293,7 +293,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 if (_httpConnectionOptions.Transports == HttpTransportType.WebSockets)
                 {
                     Log.StartingTransport(_logger, _httpConnectionOptions.Transports, uri);
-                    await StartTransport(uri, _httpConnectionOptions.Transports, transferFormat);
+                    await StartTransport(uri, _httpConnectionOptions.Transports, transferFormat, cancellationToken);
                 }
                 else
                 {
@@ -308,6 +308,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 do
                 {
                     negotiationResponse = await GetNegotiationResponseAsync(uri, cancellationToken);
+                    cancellationToken.ThrowIfCancellationRequested();
 
                     if (negotiationResponse.Url != null)
                     {
@@ -372,7 +373,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                             }
 
                             Log.StartingTransport(_logger, transportType, connectUrl);
-                            await StartTransport(connectUrl, transportType, transferFormat);
+                            await StartTransport(connectUrl, transportType, transferFormat, cancellationToken);
                             break;
                         }
                     }
@@ -444,7 +445,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             return Utils.AppendQueryString(url, "id=" + connectionId);
         }
 
-        private async Task StartTransport(Uri connectUrl, HttpTransportType transportType, TransferFormat transferFormat)
+        private async Task StartTransport(Uri connectUrl, HttpTransportType transportType, TransferFormat transferFormat, CancellationToken cancellationToken)
         {
             // Construct the transport
             var transport = _transportFactory.CreateTransport(transportType);
@@ -452,7 +453,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
             // Start the transport, giving it one end of the pipe
             try
             {
-                await transport.StartAsync(connectUrl, transferFormat);
+                await transport.StartAsync(connectUrl, transferFormat, cancellationToken);
             }
             catch (Exception ex)
             {
