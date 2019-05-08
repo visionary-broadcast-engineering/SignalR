@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         private static readonly int _maxRedirects = 100;
         private static readonly Task<string> _noAccessToken = Task.FromResult<string>(null);
 
-        private static readonly TimeSpan HttpClientTimeout = TimeSpan.FromSeconds(10);
+        private static readonly TimeSpan HttpClientTimeout = TimeSpan.FromSeconds(120);
 #if !NETCOREAPP2_1
         private static readonly Version Windows8Version = new Version(6, 2);
 #endif
