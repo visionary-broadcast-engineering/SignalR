@@ -145,7 +145,7 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
             // It's OK to be disposed while registering a callback, we'll just never call the callback anyway (as with all the callbacks registered before disposal).
             var invocationHandler = new InvocationHandler(parameterTypes, handler, state);
-            var invocationList = _handlers.AddOrUpdate(methodName, _ => new InvocationHandlerList(invocationHandler) ,
+            var invocationList = _handlers.AddOrUpdate(methodName, _ => new InvocationHandlerList(invocationHandler),
                 (_, invocations) =>
                 {
                     lock (invocations)
@@ -224,7 +224,7 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 Log.Starting(_logger);
 
                 // Start the connection
-                var connection = await _connectionFactory.ConnectAsync(_protocol.TransferFormat);
+                var connection = await _connectionFactory.ConnectAsync(_protocol.TransferFormat, cancellationToken);
                 var startingConnectionState = new ConnectionState(connection, this);
 
                 // From here on, if an error occurs we need to shut down the connection because
