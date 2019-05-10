@@ -310,7 +310,7 @@ namespace Microsoft.AspNetCore.SignalR.Client
                 Log.Starting(_logger);
 
                 // Start the connection
-                var connection = await _connectionFactory.ConnectAsync(_protocol.TransferFormat);
+                var connection = await _connectionFactory.ConnectAsync(_protocol.TransferFormat, cancellationToken);
                 var startingConnectionState = new ConnectionState(connection, this);
                 _hasInherentKeepAlive = connection.Features.Get<IConnectionInherentKeepAliveFeature>()?.HasInherentKeepAlive ?? false;
 
